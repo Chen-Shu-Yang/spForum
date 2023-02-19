@@ -19,7 +19,7 @@ const { Config } = require('node-json-db/dist/lib/JsonDBConfig');
 const uuid = require('uuid');
 
 const udb = new JsonDB(new Config('myDataBase', true, false, '/'));
-const { OAuth2Client } = require('google-auth-library');
+// const { OAuth2Client } = require('google-auth-library');
 const verifyToken = require('../auth/isLoggedInMiddleWare');
 
 // model
@@ -33,8 +33,8 @@ const Event = require('../model/event');
 // const { parse } = require('dotenv');
 
 // Google Auth Library
-const CLIENT_ID = '370180577092-24sie7netu2b0vg8a0a523pumd2tvaol.apps.googleusercontent.com';
-const client = new OAuth2Client(CLIENT_ID);
+// const CLIENT_ID = '370180577092-24sie7netu2b0vg8a0a523pumd2tvaol.apps.googleusercontent.com';
+// const client = new OAuth2Client(CLIENT_ID);
 
 // var verifyToken = require('../auth/verifyToken.js');
 // const { JsonWebTokenError } = require('jsonwebtoken');

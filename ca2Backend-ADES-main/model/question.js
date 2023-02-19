@@ -25,7 +25,7 @@ const Question = {
 
       const sql = `SELECT  question.questionid, question.description, question.title
       , u.username, u.credential, category.categoryid, category.full_name, count(liked.questionid) 'upvotes', r.status
-      FROM heroku_ace460f1419a5da.questions AS question
+      FROM heroku_9a069375239a622.questions AS question
       LEFT JOIN qnlikes as liked on question.questionid = liked.questionid
       Inner join user as u on question.userid = u.userid
       INNER JOIN category ON category.categoryid = question.categoryid
@@ -66,7 +66,7 @@ const Question = {
 
       const sql = `SELECT  question.questionid, question.description, question.title
       , u.username, u.credential, category.categoryid, category.full_name, count(liked.questionid) 'upvotes', r.status
-      FROM heroku_ace460f1419a5da.questions AS question
+      FROM heroku_9a069375239a622.questions AS question
       LEFT JOIN qnlikes as liked on question.questionid = liked.questionid
       Inner join user as u on question.userid = u.userid
       INNER JOIN category ON category.categoryid = question.categoryid
@@ -106,7 +106,7 @@ const Question = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT distinct question.questionid, question.title, question.description, u.username, u.credential, count(liked.questionid) 'upvotes'  
-                FROM heroku_ace460f1419a5da.questions AS question
+                FROM heroku_9a069375239a622.questions AS question
                 LEFT JOIN qnlikes as liked on question.questionid = liked.questionid
                 Inner join user as u on question.userid = u.userid
                 
@@ -144,7 +144,7 @@ const Question = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT distinct question.title, question.description, c.*, u.username, u.credential, count(liked.questionid) 'upvotes'  
-                FROM heroku_ace460f1419a5da.questions AS question
+                FROM heroku_9a069375239a622.questions AS question
                 LEFT JOIN qnlikes as liked on question.questionid = liked.questionid
                 Inner join user as u on question.userid = u.userid
                 Inner join category as c on question.categoryid = c.categoryid
@@ -217,7 +217,7 @@ const Question = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.questions WHERE questionid = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.questions WHERE questionid = ?;';
 
       conn.query(sql, [id], (err, result) => {
         conn.end();
@@ -248,7 +248,7 @@ const Question = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT distinct answer.comment, u.username, answer.answerid, count(liked.ansid) 'upvotes'  
-                            FROM heroku_ace460f1419a5da.answers AS answer
+                            FROM heroku_9a069375239a622.answers AS answer
                             LEFT JOIN anslikes as liked on answer.answerid = liked.ansid
                             Inner join user as u on answer.userid = u.userid
                             where answer.questionid = ?
@@ -292,7 +292,7 @@ const Question = {
 
       const sql = `
                     UPDATE
-                        heroku_ace460f1419a5da.questions
+                        heroku_9a069375239a622.questions
                     SET
                         title = ?,
                         description = ?,
@@ -392,9 +392,9 @@ const Question = {
       console.log('Connected!');
 
       let sql = `SELECT questions.questionid, full_name, username, credential, title, questions.description, questions.categoryid ,count(liked.questionid) 'upvotes'
-                FROM heroku_ace460f1419a5da.questions 
+                FROM heroku_9a069375239a622.questions 
                 LEFT JOIN qnlikes as liked on questions.questionid = liked.questionid
-                INNER JOIN heroku_ace460f1419a5da.user ON questions.userid = user.userid
+                INNER JOIN heroku_9a069375239a622.user ON questions.userid = user.userid
                 INNER JOIN category ON category.categoryid = questions.categoryid
                 WHERE questions.categoryid = ? AND title LIKE ?
                 group by questions.questionid`;
@@ -430,8 +430,8 @@ const Question = {
       console.log('Connected!');
 
       let sql = `SELECT questions.questionid, full_name, username, credential, title, questions.description, questions.categoryid 
-                FROM heroku_ace460f1419a5da.questions 
-                INNER JOIN heroku_ace460f1419a5da.user ON questions.userid = user.userid
+                FROM heroku_9a069375239a622.questions 
+                INNER JOIN heroku_9a069375239a622.user ON questions.userid = user.userid
                 INNER JOIN category ON category.categoryid = questions.categoryid
                 WHERE title LIKE ?`;
 
@@ -469,7 +469,7 @@ const Question = {
 
       const sql = `
                 INSERT INTO 
-                heroku_ace460f1419a5da.answers (
+                heroku_9a069375239a622.answers (
                       userid, 
                       questionid,
                       comment)

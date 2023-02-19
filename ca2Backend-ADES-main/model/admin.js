@@ -26,7 +26,7 @@ const Admin = {
         return callback(err, null);
       }
       console.log('DB successfully connected!');
-      const sql = 'SELECT COUNT(userid) \'userNo\' FROM heroku_ace460f1419a5da.user';
+      const sql = 'SELECT COUNT(userid) \'userNo\' FROM heroku_9a069375239a622.user';
       // eslint-disable-next-line no-shadow
       conn.query(sql, [], (err, result) => {
         conn.end();
@@ -56,7 +56,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'SELECT COUNT(questionid) \'postNo\' FROM heroku_ace460f1419a5da.questions';
+      const sql = 'SELECT COUNT(questionid) \'postNo\' FROM heroku_9a069375239a622.questions';
 
       conn.query(sql, [], (err, result) => {
         conn.end();
@@ -86,7 +86,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'SELECT COUNT(storyId) \'storyNo\' FROM heroku_ace460f1419a5da.story';
+      const sql = 'SELECT COUNT(storyId) \'storyNo\' FROM heroku_9a069375239a622.story';
 
       conn.query(sql, [], (err, result) => {
         conn.end();
@@ -116,7 +116,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'SELECT COUNT(eventid) \'eventNo\' FROM heroku_ace460f1419a5da.events';
+      const sql = 'SELECT COUNT(eventid) \'eventNo\' FROM heroku_9a069375239a622.events';
 
       conn.query(sql, [], (err, result) => {
         conn.end();
@@ -147,7 +147,7 @@ const Admin = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT distinct question.questionid, question.title, question.description, count(liked.questionid) 'upvotes'  
-                FROM heroku_ace460f1419a5da.questions AS question
+                FROM heroku_9a069375239a622.questions AS question
                 LEFT JOIN qnlikes as liked on question.questionid = liked.questionid
                 
                 group by question.questionid
@@ -183,7 +183,7 @@ const Admin = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT distinct S.storyId, S.title, S.story, s.storyLike, count(C.storyID) 'comments'  
-                FROM heroku_ace460f1419a5da.story AS S
+                FROM heroku_9a069375239a622.story AS S
                 LEFT JOIN storyComments as C on S.storyId= C.storyID
 
                                 
@@ -224,7 +224,7 @@ const Admin = {
 
       const sql = `SELECT distinct question.questionid, question.title, question.description, u.username, 
                 u.credential, count(liked.questionid) 'upvotes', DATE_FORMAT(question.created_at, '%Y-%m-%d') 'date'  
-                FROM heroku_ace460f1419a5da.questions AS question
+                FROM heroku_9a069375239a622.questions AS question
                 LEFT JOIN qnlikes as liked on question.questionid = liked.questionid
                 Inner join user as u on question.userid = u.userid
                 
@@ -262,9 +262,9 @@ const Admin = {
       console.log('Connected!');
 
       const sql = `SELECT questions.questionid, username, questions.title, questions.description, DATE_FORMAT(questions.created_at, '%Y-%m-%d') 'date', COUNT(liked.questionid) 'upvotes'
-                FROM heroku_ace460f1419a5da.questions 
+                FROM heroku_9a069375239a622.questions 
                 LEFT JOIN qnlikes AS liked ON questions.questionid = liked.questionid
-                INNER JOIN heroku_ace460f1419a5da.user ON questions.userid = user.userid
+                INNER JOIN heroku_9a069375239a622.user ON questions.userid = user.userid
                 WHERE username LIKE ?
                 GROUP BY questions.questionid`;
 
@@ -295,9 +295,9 @@ const Admin = {
 
       if (start === '' || end === '' || (start === '' && end === '')) {
         const sql = `SELECT questions.questionid, username, questions.title, questions.description, DATE_FORMAT(questions.created_at, '%Y-%m-%d') 'date', COUNT(liked.questionid) 'upvotes'
-                    FROM heroku_ace460f1419a5da.questions 
+                    FROM heroku_9a069375239a622.questions 
                     LEFT JOIN qnlikes AS liked ON questions.questionid = liked.questionid
-                    INNER JOIN heroku_ace460f1419a5da.user ON questions.userid = user.userid
+                    INNER JOIN heroku_9a069375239a622.user ON questions.userid = user.userid
                     GROUP BY questions.questionid`;
 
         conn.query(sql, [], (err, result) => {
@@ -311,9 +311,9 @@ const Admin = {
         });
       } else if (start === end) {
         const sql = `SELECT questions.questionid, username, questions.title, questions.description, DATE_FORMAT(questions.created_at, '%Y-%m-%d') 'date', COUNT(liked.questionid) 'upvotes'
-                    FROM heroku_ace460f1419a5da.questions 
+                    FROM heroku_9a069375239a622.questions 
                     LEFT JOIN qnlikes AS liked ON questions.questionid = liked.questionid
-                    INNER JOIN heroku_ace460f1419a5da.user ON questions.userid = user.userid
+                    INNER JOIN heroku_9a069375239a622.user ON questions.userid = user.userid
                     WHERE DATE_FORMAT(questions.created_at, '%Y-%m-%d') = ?
                     GROUP BY questions.questionid`;
 
@@ -328,9 +328,9 @@ const Admin = {
         });
       } else {
         const sql = `SELECT questions.questionid, username, questions.title, questions.description, DATE_FORMAT(questions.created_at, '%Y-%m-%d') 'date', COUNT(liked.questionid) 'upvotes'
-                    FROM heroku_ace460f1419a5da.questions 
+                    FROM heroku_9a069375239a622.questions 
                     LEFT JOIN qnlikes AS liked ON questions.questionid = liked.questionid
-                    INNER JOIN heroku_ace460f1419a5da.user ON questions.userid = user.userid
+                    INNER JOIN heroku_9a069375239a622.user ON questions.userid = user.userid
                     WHERE DATE_FORMAT(questions.created_at, '%Y-%m-%d') >= ? AND DATE_FORMAT(questions.created_at, '%Y-%m-%d') <= ?
                     GROUP BY questions.questionid`;
 
@@ -361,8 +361,8 @@ const Admin = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT distinct S.storyId, S.description, S.title, S.story, U.username, DATE_FORMAT(S.created_at, '%Y-%m-%d') 'date'  
-                FROM heroku_ace460f1419a5da.story AS S
-                LEFT JOIN heroku_ace460f1419a5da.user as U on S.userid = U.userid
+                FROM heroku_9a069375239a622.story AS S
+                LEFT JOIN heroku_9a069375239a622.user as U on S.userid = U.userid
                                 
                 group by S.storyId
                 order by s.storyLike DESC;`;
@@ -397,8 +397,8 @@ const Admin = {
       console.log('Connected!');
 
       const sql = `SELECT distinct S.storyId, S.description, S.title, S.story, U.username, DATE_FORMAT(S.created_at, '%Y-%m-%d') 'date'  
-                FROM heroku_ace460f1419a5da.story AS S
-                LEFT JOIN heroku_ace460f1419a5da.user as U on S.userid = U.userid
+                FROM heroku_9a069375239a622.story AS S
+                LEFT JOIN heroku_9a069375239a622.user as U on S.userid = U.userid
                 WHERE U.username LIKE ?
                 group by S.storyId`;
 
@@ -429,8 +429,8 @@ const Admin = {
 
       if (start === '' || end === '' || (start === '' && end === '')) {
         const sql = `SELECT distinct S.storyId, S.description, S.title, S.story, U.username, DATE_FORMAT(S.created_at, '%Y-%m-%d') 'date'  
-                    FROM heroku_ace460f1419a5da.story AS S
-                    LEFT JOIN heroku_ace460f1419a5da.user as U on S.userid = U.userid
+                    FROM heroku_9a069375239a622.story AS S
+                    LEFT JOIN heroku_9a069375239a622.user as U on S.userid = U.userid
                     group by S.storyId`;
 
         conn.query(sql, [], (err, result) => {
@@ -445,8 +445,8 @@ const Admin = {
       } else if (start === end) {
         const sql = `                 
                     SELECT distinct S.storyId, S.description, S.title, S.story, U.username, DATE_FORMAT(S.created_at, '%Y-%m-%d') 'date'  
-                    FROM heroku_ace460f1419a5da.story AS S
-                    LEFT JOIN heroku_ace460f1419a5da.user as U on S.userid = U.userid
+                    FROM heroku_9a069375239a622.story AS S
+                    LEFT JOIN heroku_9a069375239a622.user as U on S.userid = U.userid
                     WHERE DATE_FORMAT(S.created_at, '%Y-%m-%d') = ?
                     group by S.storyId`;
 
@@ -462,8 +462,8 @@ const Admin = {
       } else {
         const sql = `                    
                     SELECT distinct S.storyId, S.description, S.title, S.story, U.username, DATE_FORMAT(S.created_at, '%Y-%m-%d') 'date'  
-                    FROM heroku_ace460f1419a5da.story AS S
-                    LEFT JOIN heroku_ace460f1419a5da.user as U on S.userid = U.userid
+                    FROM heroku_9a069375239a622.story AS S
+                    LEFT JOIN heroku_9a069375239a622.user as U on S.userid = U.userid
                     WHERE DATE_FORMAT(S.created_at, '%Y-%m-%d') >= ? AND DATE_FORMAT(S.created_at, '%Y-%m-%d') <= ?
                     group by S.storyId`;
 
@@ -491,7 +491,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.story WHERE storyId = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.story WHERE storyId = ?;';
 
       conn.query(sql, [id], (err, result) => {
         conn.end();
@@ -523,7 +523,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = `SELECT U.userid, U.username, U.email, U.school, R.roleID, R.roleName FROM heroku_ace460f1419a5da.user AS U, heroku_ace460f1419a5da.role AS R
+      const sql = `SELECT U.userid, U.username, U.email, U.school, R.roleID, R.roleName FROM heroku_9a069375239a622.user AS U, heroku_9a069375239a622.role AS R
                             WHERE U.role = R.roleID;`;
 
       conn.query(sql, [], (err, result) => {
@@ -556,7 +556,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = `SELECT U.userid, U.username, U.email, U.school, R.roleID, R.roleName FROM heroku_ace460f1419a5da.user AS U, heroku_ace460f1419a5da.role AS R
+      const sql = `SELECT U.userid, U.username, U.email, U.school, R.roleID, R.roleName FROM heroku_9a069375239a622.user AS U, heroku_9a069375239a622.role AS R
                             WHERE U.role = R.roleID AND R.roleName = ?;`;
 
       conn.query(sql, [role], (err, result) => {
@@ -589,7 +589,7 @@ const Admin = {
       }
       console.log('Connected!');
 
-      const sql = `SELECT U.userid, U.username, U.email, U.school, R.roleID, R.roleName FROM heroku_ace460f1419a5da.user AS U, heroku_ace460f1419a5da.role AS R
+      const sql = `SELECT U.userid, U.username, U.email, U.school, R.roleID, R.roleName FROM heroku_9a069375239a622.user AS U, heroku_9a069375239a622.role AS R
                             WHERE U.role = R.roleID AND username LIKE ?;`;
 
       const queryParams = [`%${username}%`];
@@ -618,8 +618,8 @@ const Admin = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT R.*, COUNT(userid) AS no_of_users 
-                            FROM heroku_ace460f1419a5da.role AS R
-                            LEFT JOIN heroku_ace460f1419a5da.user AS U
+                            FROM heroku_9a069375239a622.role AS R
+                            LEFT JOIN heroku_9a069375239a622.user AS U
                             ON U.role = R.roleID
                             GROUP BY R.roleID;`;
 
@@ -660,7 +660,7 @@ const Admin = {
 
       const sql = `
                 INSERT INTO
-                    heroku_ace460f1419a5da.role 
+                    heroku_9a069375239a622.role 
                     (roleName, roleDescription)
                 VALUES
                     (?, ?);
@@ -693,7 +693,7 @@ const Admin = {
 
       const sql = `
                 UPDATE
-                    heroku_ace460f1419a5da.user
+                    heroku_9a069375239a622.user
                 SET
                     role = ?
                 WHERE
@@ -726,7 +726,7 @@ const Admin = {
 
       const sql = `
                 UPDATE
-                    heroku_ace460f1419a5da.role
+                    heroku_9a069375239a622.role
                 SET
                     roleName = ?,
                     roleDescription = ?
@@ -756,7 +756,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.role WHERE roleId = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.role WHERE roleId = ?;';
 
       conn.query(sql, [id], (err, result) => {
         conn.end();
@@ -786,7 +786,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.user WHERE userid = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.user WHERE userid = ?;';
 
       conn.query(sql, [id], (err, result) => {
         conn.end();
@@ -819,8 +819,8 @@ const Admin = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT R.reportID, R.title, R.description 'reportDetail', R.status, U.username, U.email, Q.questionid, Q.title 'qnTitle', Q.description, T.username 'Poster', T.email 'PosterEmail'
-                FROM heroku_ace460f1419a5da.reports AS R, heroku_ace460f1419a5da.questions AS Q, heroku_ace460f1419a5da.user AS U, 
-                (SELECT U.userid, U.username, U.email FROM heroku_ace460f1419a5da.user AS U) AS T
+                FROM heroku_9a069375239a622.reports AS R, heroku_9a069375239a622.questions AS Q, heroku_9a069375239a622.user AS U, 
+                (SELECT U.userid, U.username, U.email FROM heroku_9a069375239a622.user AS U) AS T
                 WHERE Q.questionid = R.postID AND U.userid = R.reporter AND status = 'Pending' AND T.userid = Q.userid`;
 
       conn.query(sql, [], (err, result) => {
@@ -854,7 +854,7 @@ const Admin = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT R.reportID, R.title, R.description 'reportDetail', R.status, U.username, Q.questionid, Q.title 'qnTitle', Q.description 
-                FROM heroku_ace460f1419a5da.reports AS R, heroku_ace460f1419a5da.questions AS Q, heroku_ace460f1419a5da.user AS U
+                FROM heroku_9a069375239a622.reports AS R, heroku_9a069375239a622.questions AS Q, heroku_9a069375239a622.user AS U
                 WHERE Q.questionid = R.postID AND U.userid = R.reporter AND status IN('Blocked', 'Reject')`;
 
       conn.query(sql, [], (err, result) => {
@@ -891,7 +891,7 @@ const Admin = {
 
       const sql = `
                 UPDATE
-                    heroku_ace460f1419a5da.reports
+                    heroku_9a069375239a622.reports
                 SET
                     blockReason = ?,
                     status = ?
@@ -925,7 +925,7 @@ const Admin = {
 
       const sql = `
                 UPDATE
-                    heroku_ace460f1419a5da.reports
+                    heroku_9a069375239a622.reports
                 SET
                     blockReason = ?,
                     status = ?
@@ -958,8 +958,8 @@ const Admin = {
       console.log('Connected!');
 
       const sql = `SELECT R.reportID, R.title, R.description 'reportDetail', R.status, U.username, U.email, Q.questionid, Q.title 'qnTitle', Q.description, T.username 'Poster', T.email 'PosterEmail'
-                FROM heroku_ace460f1419a5da.reports AS R, heroku_ace460f1419a5da.questions AS Q, heroku_ace460f1419a5da.user AS U, 
-                (SELECT U.userid, U.username, U.email FROM heroku_ace460f1419a5da.user AS U) AS T
+                FROM heroku_9a069375239a622.reports AS R, heroku_9a069375239a622.questions AS Q, heroku_9a069375239a622.user AS U, 
+                (SELECT U.userid, U.username, U.email FROM heroku_9a069375239a622.user AS U) AS T
                 WHERE Q.questionid = R.postID AND U.userid = R.reporter AND status = 'Pending' AND T.userid = Q.userid AND Q.description LIKE ?`;
 
       const queryParams = [`%${post}%`];
@@ -990,7 +990,7 @@ const Admin = {
       console.log('Connected!');
 
       const sql = `SELECT R.reportID, R.title, R.description 'reportDetail', R.status, U.username, Q.questionid, Q.title 'qnTitle', Q.description 
-                FROM heroku_ace460f1419a5da.reports AS R, heroku_ace460f1419a5da.questions AS Q, heroku_ace460f1419a5da.user AS U
+                FROM heroku_9a069375239a622.reports AS R, heroku_9a069375239a622.questions AS Q, heroku_9a069375239a622.user AS U
                 WHERE Q.questionid = R.postID AND U.userid = R.reporter AND status IN('Blocked', 'Reject') AND Q.description LIKE ?`;
 
       const queryParams = [`%${blocked}%`];
@@ -1023,11 +1023,11 @@ const Admin = {
 
       if (status === 'Reject') {
         sql = `SELECT R.reportID, R.title, R.description 'reportDetail', R.status, U.username, Q.questionid, Q.title 'qnTitle', Q.description 
-                FROM heroku_ace460f1419a5da.reports AS R, heroku_ace460f1419a5da.questions AS Q, heroku_ace460f1419a5da.user AS U
+                FROM heroku_9a069375239a622.reports AS R, heroku_9a069375239a622.questions AS Q, heroku_9a069375239a622.user AS U
                 WHERE Q.questionid = R.postID AND U.userid = R.reporter AND status = ?;`;
       } else if (status === 'Blocked') {
         sql = `SELECT R.reportID, R.title, R.description 'reportDetail', R.status, U.username, Q.questionid, Q.title 'qnTitle', Q.description 
-                FROM heroku_ace460f1419a5da.reports AS R, heroku_ace460f1419a5da.questions AS Q, heroku_ace460f1419a5da.user AS U
+                FROM heroku_9a069375239a622.reports AS R, heroku_9a069375239a622.questions AS Q, heroku_9a069375239a622.user AS U
                 WHERE Q.questionid = R.postID AND U.userid = R.reporter AND status = ?;`;
       }
 
@@ -1067,7 +1067,7 @@ const Admin = {
 
       const sql = `SELECT distinct E.eventid, E.eventTitle, E.eventDescription, E.maxCapacity, u.username, count(P.participatingID) 'participantCount', 
       DATE_FORMAT(E.eventTime, '%Y-%m-%d') 'date'  
-      FROM heroku_ace460f1419a5da.events AS E
+      FROM heroku_9a069375239a622.events AS E
       LEFT JOIN participants as P on E.eventid= P.eventid
       Inner join user as u on E.createdBy = u.userid                
       group by E.eventid`;
@@ -1110,7 +1110,7 @@ const Admin = {
       if (searchBy === 'Event') {
         sql = `SELECT distinct E.eventid, E.eventTitle, E.eventDescription, E.maxCapacity, u.username, count(P.participatingID) 'participantCount', 
                 DATE_FORMAT(E.created_at, '%Y-%m-%d') 'date'  
-                FROM heroku_ace460f1419a5da.events AS E
+                FROM heroku_9a069375239a622.events AS E
                 LEFT JOIN participants as P on E.eventid= P.event
                 Inner join user as u on E.createdBy = u.userid
                 WHERE E.eventTitle LIKE ?              
@@ -1118,7 +1118,7 @@ const Admin = {
       } else {
         sql = `SELECT distinct E.eventid, E.eventTitle, E.eventDescription, E.maxCapacity, u.username, count(P.participatingID) 'participantCount', 
                 DATE_FORMAT(E.created_at, '%Y-%m-%d') 'date'  
-                FROM heroku_ace460f1419a5da.events AS E
+                FROM heroku_9a069375239a622.events AS E
                 LEFT JOIN participants as P on E.eventid= P.event
                 Inner join user as u on E.createdBy = u.userid
                 WHERE username LIKE ?              
@@ -1155,7 +1155,7 @@ const Admin = {
       if (start === '' || end === '' || (start === '' && end === '')) {
         const sql = `SELECT distinct E.eventid, E.eventTitle, E.eventDescription, E.maxCapacity, u.username, count(P.participatingID) 'participantCount', 
                     DATE_FORMAT(E.created_at, '%Y-%m-%d') 'date'  
-                    FROM heroku_ace460f1419a5da.events AS E
+                    FROM heroku_9a069375239a622.events AS E
                     LEFT JOIN participants as P on E.eventid= P.event
                     Inner join user as u on E.createdBy = u.userid                
                     group by E.eventid`;
@@ -1173,7 +1173,7 @@ const Admin = {
       } else if (start === end) {
         const sql = `SELECT distinct E.eventid, E.eventTitle, E.eventDescription, E.maxCapacity, u.username, count(P.participatingID) 'participantCount', 
                     DATE_FORMAT(E.created_at, '%Y-%m-%d') 'date'  
-                    FROM heroku_ace460f1419a5da.events AS E
+                    FROM heroku_9a069375239a622.events AS E
                     LEFT JOIN participants as P on E.eventid= P.event
                     Inner join user as u on E.createdBy = u.userid     
                     WHERE DATE_FORMAT(E.created_at, '%Y-%m-%d') = ?           
@@ -1192,7 +1192,7 @@ const Admin = {
       } else {
         const sql = `SELECT distinct E.eventid, E.eventTitle, E.eventDescription, E.maxCapacity, u.username, count(P.participatingID) 'participantCount', 
                     DATE_FORMAT(E.created_at, '%Y-%m-%d') 'date'  
-                    FROM heroku_ace460f1419a5da.events AS E
+                    FROM heroku_9a069375239a622.events AS E
                     LEFT JOIN participants as P on E.eventid= P.event
                     Inner join user as u on E.createdBy = u.userid     
                     WHERE DATE_FORMAT(E.created_at, '%Y-%m-%d') >= ? AND DATE_FORMAT(E.created_at, '%Y-%m-%d') <= ?       
@@ -1224,7 +1224,7 @@ const Admin = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.events WHERE eventid = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.events WHERE eventid = ?;';
 
       // eslint-disable-next-line no-shadow
       conn.query(sql, [id], (err, result) => {

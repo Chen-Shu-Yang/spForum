@@ -31,7 +31,7 @@ const story = {
       const sql = `select 
       story, storyId, title, description,
       DATE_FORMAT(story.created_at, '%Y-%m-%d') 'date' 
-      FROM heroku_ace460f1419a5da.story`;
+      FROM heroku_9a069375239a622.story`;
 
       conn.query(sql, (err, result) => {
         conn.end();
@@ -63,7 +63,7 @@ const story = {
       console.log('DB successfully connected!');
       const sql = `
       select story,storyId, title, description,DATE_FORMAT(story.created_at, '%Y-%m-%d') 'date' 
-      FROM heroku_ace460f1419a5da.story where storyId = ?
+      FROM heroku_9a069375239a622.story where storyId = ?
       `;
       conn.query(sql, [qnID], (err, result) => {
         conn.end();
@@ -94,7 +94,7 @@ const story = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'SELECT * FROM heroku_ace460f1419a5da.story  order by created_at desc limit 4;';
+      const sql = 'SELECT * FROM heroku_9a069375239a622.story  order by created_at desc limit 4;';
       conn.query(sql, (err, result) => {
         conn.end();
         if (err) {
@@ -125,7 +125,7 @@ const story = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'SELECT storyId, title, description FROM heroku_ace460f1419a5da.story WHERE userId = ?;';
+      const sql = 'SELECT storyId, title, description FROM heroku_9a069375239a622.story WHERE userId = ?;';
 
       conn.query(sql, [userId], (err, result) => {
         conn.end();
@@ -190,7 +190,7 @@ const story = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.story WHERE storyId = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.story WHERE storyId = ?;';
 
       conn.query(sql, [id], (err, result) => {
         conn.end();
@@ -224,7 +224,7 @@ const story = {
 
       const sql = `
                 UPDATE
-                    heroku_ace460f1419a5da.story
+                    heroku_9a069375239a622.story
                 SET
                 title = ?,
                 description = ?,
@@ -256,7 +256,7 @@ const story = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT  comments.comment, u.username, comments.commentID,u.description,s.story, s.storyId
-                FROM heroku_ace460f1419a5da.storycomments AS comments
+                FROM heroku_9a069375239a622.storycomments AS comments
                 Inner join user as u on comments.userid = u.userid
                 Inner join story as s on comments.storyID = s.storyId
                 where s.storyId = ?
@@ -298,7 +298,7 @@ const story = {
 
       const sql = `
                 INSERT INTO 
-                heroku_ace460f1419a5da.storycomments (
+                heroku_9a069375239a622.storycomments (
                     userID, 
                     storyID,
                       comment)

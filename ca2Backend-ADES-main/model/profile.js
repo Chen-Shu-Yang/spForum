@@ -26,7 +26,7 @@ const Profile = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'SELECT username, email, school, credential, description, created_at FROM heroku_ace460f1419a5da.user WHERE userid = ?;';
+      const sql = 'SELECT username, email, school, credential, description, created_at FROM heroku_9a069375239a622.user WHERE userid = ?;';
 
       conn.query(sql, [username], (err, result) => {
         conn.end();
@@ -59,7 +59,7 @@ const Profile = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT q.*, u.username, u.credential ,r.status
-      FROM heroku_ace460f1419a5da.questions AS q
+      FROM heroku_9a069375239a622.questions AS q
       inner join user as u on u.userid = q.userid
       left join reports as r on r.postID = q.questionid
       WHERE q.userid = ?
@@ -95,7 +95,7 @@ const Profile = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT q.*, u.username, u.credential ,r.status, count(liked.questionid) AS upvotes
-      FROM heroku_ace460f1419a5da.questions AS q
+      FROM heroku_9a069375239a622.questions AS q
       LEFT JOIN qnlikes as liked on q.questionid = liked.questionid
       inner join user as u on u.userid = q.userid
       left join reports as r on r.postID = q.questionid
@@ -133,7 +133,7 @@ const Profile = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT q.*, u.username, u.credential ,r.status
-      FROM heroku_ace460f1419a5da.questions AS q
+      FROM heroku_9a069375239a622.questions AS q
       inner join user as u on u.userid = q.userid
       left join reports as r on r.postID = q.questionid
       WHERE q.userid = ?
@@ -170,7 +170,7 @@ const Profile = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT u.username, u.credential, q.*, s.saveId 
-                           FROM heroku_ace460f1419a5da.questions AS q, heroku_ace460f1419a5da.user AS u, heroku_ace460f1419a5da.saved AS s 
+                           FROM heroku_9a069375239a622.questions AS q, heroku_9a069375239a622.user AS u, heroku_9a069375239a622.saved AS s 
                            WHERE s.questionid = q.questionid AND q.userid = u.userid AND s.userid = ?;
                         `;
 
@@ -203,7 +203,7 @@ const Profile = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT u.username, u.credential, q.* 
-                           FROM heroku_ace460f1419a5da.qnlikes AS l, heroku_ace460f1419a5da.user AS u, heroku_ace460f1419a5da.questions AS q 
+                           FROM heroku_9a069375239a622.qnlikes AS l, heroku_9a069375239a622.user AS u, heroku_9a069375239a622.questions AS q 
                            WHERE q.userid = u.userid AND q.questionid = l.questionid AND l.userid = ?;
                         `;
 
@@ -236,7 +236,7 @@ const Profile = {
       console.log('DB successfully connected!');
 
       const sql = `SELECT u.username, u.credential, a.*, q.title, a.answerid 
-                           FROM heroku_ace460f1419a5da.anslikes AS l, heroku_ace460f1419a5da.user AS u, heroku_ace460f1419a5da.answers AS a, heroku_ace460f1419a5da.questions AS q 
+                           FROM heroku_9a069375239a622.anslikes AS l, heroku_9a069375239a622.user AS u, heroku_9a069375239a622.answers AS a, heroku_9a069375239a622.questions AS q 
                            WHERE a.userid = u.userid AND a.answerid = l.ansid AND q.questionid = a.questionid AND l.userid = ?;
                         `;
 
@@ -276,7 +276,7 @@ const Profile = {
 
       const sql = `
                     UPDATE
-                        heroku_ace460f1419a5da.user
+                        heroku_9a069375239a622.user
                     SET
                         username = ?,
                         email = ?,
@@ -309,7 +309,7 @@ const Profile = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.saved WHERE saveId = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.saved WHERE saveId = ?;';
 
       conn.query(sql, [id], (err, result) => {
         conn.end();
@@ -341,7 +341,7 @@ const Profile = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.qnlikes WHERE userid = ? AND questionid = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.qnlikes WHERE userid = ? AND questionid = ?;';
 
       conn.query(sql, [userid, questionid], (err, result) => {
         conn.end();
@@ -367,7 +367,7 @@ const Profile = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.anslikes WHERE userid = ? AND ansid = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.anslikes WHERE userid = ? AND ansid = ?;';
 
       conn.query(sql, [userid, answerid], (err, result) => {
         conn.end();

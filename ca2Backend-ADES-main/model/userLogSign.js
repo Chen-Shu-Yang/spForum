@@ -23,7 +23,7 @@ const userLogSign = {
       }
       console.log('Connected!');
       const sql = `SELECT U.username, U.userid, R.roleName,U.secret
-                FROM heroku_ace460f1419a5da.user AS U, heroku_ace460f1419a5da.role AS R 
+                FROM heroku_9a069375239a622.user AS U, heroku_9a069375239a622.role AS R 
                 WHERE U.role = R.roleID AND username=? AND password=?`;
 
       // eslint-disable-next-line no-shadow
@@ -86,7 +86,7 @@ const userLogSign = {
   //     console.log('Connected!');
 
   //     const sql = `SELECT U.username, U.userid, R.roleName 
-  //               FROM heroku_ace460f1419a5da.user AS U, heroku_ace460f1419a5da.role AS R 
+  //               FROM heroku_9a069375239a622.user AS U, heroku_9a069375239a622.role AS R 
   //               WHERE U.role = R.roleID AND username=?`;
 
   //     // eslint-disable-next-line no-shadow
@@ -137,7 +137,7 @@ const userLogSign = {
   //     console.log('Connected!');
 
   //     const sql = `SELECT U.username, U.userid, R.roleName 
-  //               FROM heroku_ace460f1419a5da.user AS U, heroku_ace460f1419a5da.role AS R 
+  //               FROM heroku_9a069375239a622.user AS U, heroku_9a069375239a622.role AS R 
   //               WHERE U.role = R.roleID AND username=?`;
 
   //     // eslint-disable-next-line no-shadow
@@ -197,7 +197,7 @@ const userLogSign = {
 
       const sql = `
                     INSERT INTO
-                        heroku_ace460f1419a5da.user (
+                        heroku_9a069375239a622.user (
                           username, 
                           email, 
                           password,
@@ -242,7 +242,7 @@ const userLogSign = {
 
   //     const sql = `
   //                   INSERT INTO
-  //                       heroku_ace460f1419a5da.user (
+  //                       heroku_9a069375239a622.user (
   //                         googleid,
   //                         username, 
   //                         email, 

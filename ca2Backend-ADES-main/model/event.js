@@ -26,7 +26,7 @@ const Event = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'SELECT * FROM heroku_ace460f1419a5da.events';
+      const sql = 'SELECT * FROM heroku_9a069375239a622.events';
 
       conn.query(sql, (err, result) => {
         conn.end();
@@ -60,7 +60,7 @@ const Event = {
 
       const sql = `SELECT DISTINCT e.eventid, e.eventTitle, e.eventDescription, e.eventTime, e.eventDuration, 
                             e.maxCapacity, e.createdBy, count(p.eventid) 'currentCapacity', u.username
-                            FROM heroku_ace460f1419a5da.events AS e
+                            FROM heroku_9a069375239a622.events AS e
                             LEFT JOIN participants AS p on e.eventid = p.eventid
                             INNER JOIN user as u on e.createdBy = u.userid
                             WHERE e.eventid = ?`;
@@ -102,7 +102,7 @@ const Event = {
 
       console.log('Connected!');
 
-      const sql = 'INSERT INTO heroku_ace460f1419a5da.events (eventTitle, eventDescription, eventTime, eventDuration, createdBy, maxCapacity) VALUES (?, ?, ?, ?, ?, ?);';
+      const sql = 'INSERT INTO heroku_9a069375239a622.events (eventTitle, eventDescription, eventTime, eventDuration, createdBy, maxCapacity) VALUES (?, ?, ?, ?, ?, ?);';
 
       conn.query(sql, [eventTitle, eventDescription, eventTime,
         eventDuration, createdBy, maxCapacity], (err, result) => {
@@ -128,7 +128,7 @@ const Event = {
       }
       console.log('DB successfully connected!');
 
-      const sql = 'DELETE FROM heroku_ace460f1419a5da.events WHERE eventid = ?;';
+      const sql = 'DELETE FROM heroku_9a069375239a622.events WHERE eventid = ?;';
 
       conn.query(sql, [id], (err, result) => {
         conn.end();
@@ -164,7 +164,7 @@ const Event = {
 
       console.log('Connected!');
 
-      const sql = 'UPDATE heroku_ace460f1419a5da.events SET eventTitle = ?, eventDescription = ?, eventTime = ?, eventDuration = ?, maxCapacity = ? WHERE eventid = ?;';
+      const sql = 'UPDATE heroku_9a069375239a622.events SET eventTitle = ?, eventDescription = ?, eventTime = ?, eventDuration = ?, maxCapacity = ? WHERE eventid = ?;';
 
       conn.query(sql, [eventid, eventTitle, eventDescription,
         eventTime, eventDuration, maxCapacity], (err, result) => {
@@ -192,8 +192,8 @@ const Event = {
 
       console.log('Connected!');
 
-      const sql = `INSERT INTO heroku_ace460f1419a5da.participants (eventid, userid) 
-                            SELECT ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM heroku_ace460f1419a5da.participants
+      const sql = `INSERT INTO heroku_9a069375239a622.participants (eventid, userid) 
+                            SELECT ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM heroku_9a069375239a622.participants
                             WHERE eventid = ? AND userid = ? LIMIT 1)`;
 
       conn.query(sql, [eventid, userid, eventid, userid], (err, result) => {

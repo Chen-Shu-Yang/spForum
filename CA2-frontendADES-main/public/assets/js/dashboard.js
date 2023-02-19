@@ -5,8 +5,8 @@
 /* eslint-disable no-undef */
 
 // url
-const frontEndUrl = 'https://spforum.herokuapp.com';
-const backEndUrl = 'https://spforum-backend.herokuapp.com';
+const frontEndUrl = 'https://spforums.herokuapp.com';
+const backEndUrl = 'https://spforumsbackend.herokuapp.com';
 const url = 'http://localhost:5000';
 
 // get item from url

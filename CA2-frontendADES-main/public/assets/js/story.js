@@ -5,8 +5,8 @@
 /* eslint-disable no-console */
 
 // URL
-const frontEndUrl = 'https://spforum.herokuapp.com';
-const backEndUrl = 'https://spforum-backend.herokuapp.com';
+const frontEndUrl = 'https://spforums.herokuapp.com';
+const backEndUrl = 'https://spforumsbackend.herokuapp.com';
 const userData = localStorage.getItem('userInfo');
 
 function displayStoryUser(cardInfo) {

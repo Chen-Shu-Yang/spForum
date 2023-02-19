@@ -5,8 +5,8 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
-const frontEndUrl = 'https://spforum.herokuapp.com';
-const backEndUrl = 'https://spforum-backend.herokuapp.com';
+const frontEndUrl = 'https://spforums.herokuapp.com';
+const backEndUrl = 'https://spforumsbackend.herokuapp.com';
 
 let postSearchChar = [];
 const postSearch = document.getElementById('qnaSearch');

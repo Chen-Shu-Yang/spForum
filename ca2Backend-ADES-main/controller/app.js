@@ -462,16 +462,16 @@ app.post('/login', (req, res, next) => {
     } else {
       console.log(`Token: ${result}`);
       // matched with callback(null, result)
-      const userData = result.secret;
-      console.log(`secretss: ${userData}`);
-      console.log(`sec: ${secretToken}`);
-      console.log(typeof (secretToken));
-      const verified = speakeasy.totp.verify({
-        userData,
-        encoding: 'base32',
-        secretToken,
-      });
-      console.log(`CHECKKK${verified}`);
+      // const userData = result.secret;
+      // console.log(`secretss: ${userData}`);
+      // console.log(`sec: ${secretToken}`);
+      // console.log(typeof (secretToken));
+      // const verified = speakeasy.totp.verify({
+      //   userData,
+      //   encoding: 'base32',
+      //   secretToken,
+      // });
+      // console.log(`CHECKKK${verified}`);
       msg = {
         userid: result.userid,
         username: result.username,
@@ -519,110 +519,111 @@ app.post('/register', printDebugInfo, (req, res, next) => {
   });
 });
 
-app.post('/oauth/login', (req, res, next) => {
-  const { token } = req.body;
-  let payload; let
-    username;
-  console.log(token);
+// app.post('/oauth/login', (req, res, next) => {
+//   const { token } = req.body;
+//   let payload; let
+//     username;
+//   console.log(token);
 
-  async function verify() {
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: CLIENT_ID,
-    });
-    payload = ticket.getPayload();
-    console.log(payload);
+//   async function verify() {
+//     const ticket = await client.verifyIdToken({
+//       idToken: token,
+//       audience: CLIENT_ID,
+//     });
+//     payload = ticket.getPayload();
+//     console.log(payload);
 
-    username = payload.name;
-  }
-  verify()
-    .then(() => {
-      // eslint-disable-next-line no-shadow
-      userLogSign.oauthVerify(username, (err, token, result) => {
-        if (err) {
-          // matched with callback (err, null)
-          console.log(err);
-          res.status(500);
-          return next(err);
-        }
+//     username = payload.name;
+//   }
+//   verify()
+//     .then(() => {
+//       // eslint-disable-next-line no-shadow
+//       userLogSign.oauthVerify(username, (err, token, result) => {
+//         if (err) {
+//           // matched with callback (err, null)
+//           console.log(err);
+//           res.status(500);
+//           return next(err);
+//         }
 
-        let msg;
-        if (!result) {
-          // matched with callback(null, null)
-          msg = {
-            Error: 'Invalid login',
-          };
-          res.status(404).send(msg);
-        } else {
-          // matched with callback(null, result)
-          msg = {
-            userid: result.userid,
-            username: payload.name,
-            picture: payload.picture,
-            token,
-            role: result.roleName,
-          };
-          console.log(token);
-          console.log(msg.userid);
-          res.send(msg);
-        }
-      });
-    })
-    .catch(console.error);
-});
+//         let msg;
+//         if (!result) {
+//           // matched with callback(null, null)
+//           msg = {
+//             Error: 'Invalid login',
+//           };
+//           res.status(404).send(msg);
+//         } else {
+//           // matched with callback(null, result)
+//           msg = {
+//             userid: result.userid,
+//             username: payload.name,
+//             picture: payload.picture,
+//             token,
+//             role: result.roleName,
+//           };
+//           console.log(token);
+//           console.log(msg.userid);
+//           res.send(msg);
+//         }
+//       });
+//     })
+//     .catch(console.error);
+// });
 
-app.post('/oauth', (req, res) => {
-  const { token } = req.body;
-  let payload; let
-    userid;
+// app.post('/oauth', (req, res) => {
+//   const { token } = req.body;
+//   let payload; let
+//     userid;
 
-  console.log(token);
-  async function verify() {
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: CLIENT_ID,
-    });
-    payload = ticket.getPayload();
-    userid = parseInt(payload.sub, 10);
-  }
-  verify()
-    .then(() => {
-      const result = {
-        googleid: userid,
-        username: payload.name,
-        picture: payload.picture,
-        email: payload.email,
-        success: true,
-      };
-      res.send(result);
-    })
-    .catch(console.error);
-});
+//   console.log(token);
+//   async function verify() {
+//     const ticket = await client.verifyIdToken({
+//       idToken: token,
+//       audience: CLIENT_ID,
+//     });
+//     payload = ticket.getPayload();
+//     userid = parseInt(payload.sub, 10);
+//   }
+//   verify()
+//     .then(() => {
+//       const result = {
+//         googleid: userid,
+//         username: payload.name,
+//         picture: payload.picture,
+//         email: payload.email,
+//         success: true,
+//       };
+//       res.send(result);
+//     })
+//     .catch(console.error);
+// });
 
-app.post('/oauth/register', (req, res, next) => {
-  const data = {
-    googleID: req.body.googleID,
-    email: req.body.email,
-    username: req.body.username,
-    school: req.body.school,
-  };
-  console.log(data.googleID);
+// app.post('/oauth/register', (req, res, next) => {
+//   const data = {
+//     googleID: req.body.googleID,
+//     email: req.body.email,
+//     username: req.body.username,
+//     school: req.body.school,
+//   };
+//   console.log(data.googleID);
 
-  // eslint-disable-next-line no-unused-vars
-  userLogSign.registerGoogle(data, (err, result) => {
-    if (!err) {
-      res.status(201).send({ success: true });
-    } else {
-      return next(err);
-    }
-  });
-});
+//   // eslint-disable-next-line no-unused-vars
+//   userLogSign.registerGoogle(data, (err, result) => {
+//     if (!err) {
+//       res.status(201).send({ success: true });
+//     } else {
+//       return next(err);
+//     }
+//   });
+// });
 
 //= ======================================================
 //              School
 //= ======================================================
 
 // list schools
+
 app.get('/school', printDebugInfo, (req, res, next) => {
   School.findSchool((err, result) => {
     if (!err) {

@@ -413,16 +413,16 @@ $(document).ready(() => {
   loadTopStory();
   // Login
   $('#login').click(() => {
-    const googleresponse = grecaptcha.getResponse();
-    if (googleresponse.length === 0) {
-      new Noty({
-        timeout: '5000',
-        type: 'error',
-        layout: 'topCenter',
-        theme: 'sunset',
-        text: 'Please verify ur not a robot',
-      }).show();
-    } else {
+    // const googleresponse = grecaptcha.getResponse();
+    // if (googleresponse.length === 0) {
+    //   new Noty({
+    //     timeout: '5000',
+    //     type: 'error',
+    //     layout: 'topCenter',
+    //     theme: 'sunset',
+    //     text: 'Please verify ur not a robot',
+    //   }).show();
+    // } else {
       // data extraction
       const id = $('#usernameInput').val();
       const pwd = $('#pwdInput').val();
@@ -467,7 +467,7 @@ $(document).ready(() => {
           }).show();
         },
       });
-    }
+    // }
     return false;
   });
 

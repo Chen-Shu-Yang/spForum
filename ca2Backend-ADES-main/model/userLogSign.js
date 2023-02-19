@@ -22,7 +22,7 @@ const userLogSign = {
         return callback(err, null);
       }
       console.log('Connected!');
-      const sql = `SELECT U.username, U.userid, R.roleName,U.secret
+      const sql = `SELECT U.username, U.userid, R.roleName
                 FROM heroku_9a069375239a622.user AS U, heroku_9a069375239a622.role AS R 
                 WHERE U.role = R.roleID AND username=? AND password=?`;
 

@@ -16,12 +16,12 @@ const mysql = require('mysql');
 const dbconnect = {
   getConnection() {
     const conn = mysql.createConnection({
-      host: 'us-cdbr-east-04.cleardb.com',
-      user: 'b3e10d98a728fc',
+      host: 'us-cdbr-east-06.cleardb.net',
+      user: 'bc83616d2194ff',
 
-      password: '70543b7f',
+      password: '9b326c0b',
 
-      database: 'heroku_ace460f1419a5da',
+      database: 'heroku_9a069375239a622',
     });
     return conn;
   },
